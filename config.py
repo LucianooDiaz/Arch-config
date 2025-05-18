@@ -24,11 +24,12 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from libqtile import bar, layout, qtile, widget, hook
+rom libqtile import bar, layout, qtile, widget, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 import os
+import subprocess
 
 mod = "mod4"
 terminal = guess_terminal()
@@ -188,7 +189,7 @@ screens = [
     Screen(
         top=bar.Bar(
             [
-                widget.GroupBox(
+                widget.GroupBox(        #Escritorios
                     name="groupbox",
                     highlight_method='text',
                     this_current_screen_border='#2e3440',
@@ -197,17 +198,34 @@ screens = [
                     background= '#1e1e2e',
                     fontsize=14,
                 ),
-                widget.Spacer(length=8),
-                widget.WindowName(
-                    format='{name}',
-                    max_chars=60,
+
+                widget.TextBox(         #Menu cambio wallpaper
+                    text= "menu",
+                    mouse_callbacks={
+                        'Button1': lambda: qtile.cmd_spawn ("/home/luciano/.config/utiles/rofi_menu.sh")
+                    },
+                    fontsize= 16,
+                    padding=8,
                     background= '#1e1e2e',
-                    foreground='#ffffff',
+                    foreground= '#81a1c1',
                 ),
+
+                widget.Spacer(length=8), #Reproductor
+                widget.GenPollText(
+                    update_interval = 1,
+                    func= lambda: subprocess.getoutput(
+                        "playerctl metadata --format '{{ artist }} -  {{ title }}'"
+                    ),
+                    fontsize=14,
+                    foreground= '#ffffff',
+                    background= '#1e1e2e',
+                    name = 'media'
+                    )
+
 
                 widget.Spacer(),
 
-                widget.Image(
+                widget.Image(            #Icono central
                     filename = '/home/luciano/.config/qtile/icons/archlinux.svg',
                     margin = 3,
                     scale = True,
@@ -244,7 +262,7 @@ screens = [
                 ),
             ],
             24,
-            background= '#1e1e2e',
+            background= '00000000',
             margin=[4, 8, 0, 8],
             opacity=0.8,
         ),
@@ -276,8 +294,8 @@ wl_xcursor_size = 24
 wmname = "LG3D"
 
 autostart = [
-   # "feh --bg-fill /home/luciano/Downloads/wallpaper.jpg",
-   # "picom -b",
+   # "feh --bg-fill /home/luciano/.config/utiles/wallpaper.jpg",
+    "picom -b",
     "wal -R"
 ]
 
