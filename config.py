@@ -95,24 +95,29 @@ for vt in range(1, 8):
     )
 
 
-groups = [Group(i) for i in "123456789"]
+groups = [
+    Group(""),  # círculo lleno
+    Group(""),  # círculo vacío
+    Group(""),  # otro estilo de círculo
+    Group(""),  # circulo lleno
+]
 
-for i in groups:
+for i in enumerate(groups):
     keys.extend(
         [
             # mod + group number = switch to group
             Key(
                 [mod],
-                i.name,
-                lazy.group[i.name].toscreen(),
-                desc=f"Switch to group {i.name}",
+                group.name,
+                lazy.group[group.name].toscreen(),
+                desc=f"Switch to group {group.name}",
             ),
             # mod + shift + group number = switch to & move focused window to group
             Key(
                 [mod, "shift"],
-                i.name,
-                lazy.window.togroup(i.name, switch_group=True),
-                desc=f"Switch to & move focused window to group {i.name}",
+                group.name,
+                lazy.window.togroup(group.name, switch_group=True),
+                desc=f"Switch to & move focused window to group {group.name} and switch",
             ),
             # Or, use below if you prefer not to switch to that group.
             # # mod + shift + group number = move focused window to group
