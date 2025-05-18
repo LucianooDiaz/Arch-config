@@ -189,6 +189,7 @@ screens = [
         top=bar.Bar(
             [
                 widget.GroupBox(
+                    name="groupbox",
                     highlight_method='line',
                     this_current_screen_border='#2e3440',
                     active='#cccccc',
@@ -284,10 +285,8 @@ for x in autostart:
     os.system(x)
 
 @hook.subscribe.setgroup
-    def update_group_icons():
+def update_group_icons():
         for group in qtile.groups:
-            if group.name == qtile.current_group.name:
-                group.label = ""
+            group.label = "" if group.name == qtile.current_group.name else ""
 
-            else: 
-                group.label = ""
+        qtile.call_soon(lambda: qtile.widgets_map["groupbox"].bar.draw()))
