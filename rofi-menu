@@ -1,0 +1,11 @@
+#!/bin/bash
+
+echo -e "Firefox\nTerminal\nArchWiki\nReiniciar Qtile\nSalir" | rofi -dmenu -p " Menu" | while read -r option; do
+    case "$option" in
+        "Firefox") firefox ;;
+        "Terminal") alacritty ;;  # o el que uses
+        "ArchWiki") firefox https://wiki.archlinux.org ;;
+        "Reiniciar Qtile") qtile cmd-obj -o cmd -f reload_config ;;
+        "Salir") qtile cmd-obj -o cmd -f shutdown ;;
+    esac
+done
