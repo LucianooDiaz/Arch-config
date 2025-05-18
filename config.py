@@ -289,4 +289,4 @@ def update_group_icons():
         for group in qtile.groups:
             group.label = "" if group.name == qtile.current_group.name else ""
 
-        qtile.call_soon(lambda: qtile.widgets_map["groupbox"].bar.draw()))
+       qtile.call_soon(lambda: qtile.widgets_map["groupbox"].bar.draw())
