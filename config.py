@@ -24,7 +24,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from libqtile import bar, layout, qtile, widget
+from libqtile import bar, layout, qtile, widget, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
@@ -96,13 +96,13 @@ for vt in range(1, 8):
 
 
 groups = [
-    Group(""),  # círculo lleno
-    Group(""),  # círculo vacío
-    Group(""),  # otro estilo de círculo
-    Group(""),  # circulo lleno
+    Group("1", label= ""),  # círculo lleno
+    Group("2", label= ""),  # círculo vacío
+    Group("3", label= ""),  # otro estilo de círculo
+    Group("4", label= ""),  # circulo lleno
 ]
 
-for i in enumerate(groups):
+for i, group in enumerate(groups):
     keys.extend(
         [
             # mod + group number = switch to group
@@ -128,7 +128,12 @@ for i in enumerate(groups):
 
 layouts = [
     layout.Columns(
-        border_focus_stack=["#1e1e2e", "#88c0d0"], border_width=2),
+        border_focus='#81a1c1',
+        border_focus_stack=["#1e1e2e", "#88c0d0"],
+        border_normal='#3b4252',
+        border_width=3,
+        margin=8,
+    ),
     layout.Max(),
     # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2),
@@ -188,14 +193,14 @@ screens = [
                     this_current_screen_border='#2e3440',
                     active='#cccccc',
                     inactive='#555555',
-                    background= '1e1e2e',
+                    background= '#1e1e2e',
                     fontsize=14,
                 ),
                 widget.Spacer(length=8),
                 widget.WindowName(
                     format='{name}',
                     max_chars=60,
-                    background= '1e1e2e',
+                    background= '#1e1e2e',
                     foreground='#ffffff',
                 ),
 
@@ -205,7 +210,7 @@ screens = [
                     filename = '/home/luciano/.config/qtile/icons/archlinux.svg',
                     margin = 3,
                     scale = True,
-                    background= '1e1e2e'
+                    background= '#1e1e2e'
 
                 ),
 
@@ -216,7 +221,7 @@ screens = [
                 widget.Net(
                    interface='enp0s3',  # ethernet.  #wlp2s0, wlan0 para wifi
                     format='  {down} ↓↑ {up}',
-                    background= '1e1e2e',
+                    background= '#1e1e2e',
                     foreground='#a3be8c',
                 ),
                 *(
@@ -227,18 +232,18 @@ screens = [
                         empty_char='',
                         full_char='',
                         show_short_text=False,
-                        background='1e1e2e',
+                        background='#1e1e2e',
                         foreground='#ebcb8b',
                     )] if has_battery else []
                 ),
                 widget.Clock(
                     format='󰥔  %H:%M',
-                    background='1e1e2e',
+                    background='#1e1e2e',
                     foreground='#81a1c1',
                 ),
             ],
             24,
-            background= '1e1e2e',
+            background= '#1e1e2e',
             margin=[4, 8, 0, 8],
             opacity=0.8,
         ),
@@ -278,3 +283,11 @@ autostart = [
 for x in autostart:
     os.system(x)
 
+@hook.subscribe.setgroup
+    def update_group_icons():
+        for group in qtile.groups:
+            if group.name == qtile.current_group.name:
+                group.label = ""
+
+            else: 
+                group.label = ""
