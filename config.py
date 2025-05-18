@@ -190,7 +190,7 @@ screens = [
             [
                 widget.GroupBox(
                     name="groupbox",
-                    highlight_method='line',
+                    highlight_method='text',
                     this_current_screen_border='#2e3440',
                     active='#cccccc',
                     inactive='#555555',
@@ -289,4 +289,4 @@ def update_group_icons():
         for group in qtile.groups:
             group.label = "" if group.name == qtile.current_group.name else ""
 
-       qtile.call_soon(lambda: qtile.widgets_map["groupbox"].bar.draw())
+        qtile.call_soon(lambda: qtile.widgets_map["groupbox"].bar.draw())
