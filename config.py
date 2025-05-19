@@ -97,10 +97,10 @@ for vt in range(1, 8):
 
 
 groups = [
-    Group("1", label= ""),  # círculo lleno
-    Group("2", label= ""),  # círculo vacío
-    Group("3", label= ""),  # otro estilo de círculo
-    Group("4", label= ""),  # circulo lleno
+    Group("1", label= ""),
+    Group("2", label= ""),
+    Group("3", label= ""),
+    Group("4", label= ""),
 ]
 
 for i, group in enumerate(groups):
@@ -199,28 +199,31 @@ screens = [
                     fontsize=14,
                 ),
 
+                widget.Spacer(length=8),
                 widget.TextBox(         #Menu cambio wallpaper
-                    text= "menu",
+                    text= "󰸉",
                     mouse_callbacks={
                         'Button1': lambda: qtile.cmd_spawn ("/home/luciano/.config/utiles/rofi_menu.sh")
                     },
-                    fontsize= 16,
+                    fontsize= 18,
                     padding=8,
-                    background= '#1e1e2e',
+                    background= '#00000000',
                     foreground= '#81a1c1',
                 ),
 
                 widget.Spacer(length=8), #Reproductor
                 widget.GenPollText(
                     update_interval = 1,
-                    func= lambda: subprocess.getoutput(
-                        "playerctl metadata --format '{{ artist }} -  {{ title }}'"
+                    func= lambda:(
+                        out if "No players found" not in (out :=  subprocess.getoutput(
+                            "playerctl metadata --format '{{ artist }} - {{ title }}'"
+                         ).strip()) else ""
                     ),
-                    fontsize=14,
+                    fontsize=13,
                     foreground= '#ffffff',
-                    background= '#1e1e2e',
-                    name = 'media'
-                    )
+                    background= '#00000000',
+                    name = 'media',
+                    ),
 
 
                 widget.Spacer(),
@@ -229,7 +232,7 @@ screens = [
                     filename = '/home/luciano/.config/qtile/icons/archlinux.svg',
                     margin = 3,
                     scale = True,
-                    background= '#1e1e2e'
+                    background= '#00000000'
 
                 ),
 
@@ -302,7 +305,7 @@ autostart = [
 for x in autostart:
     os.system(x)
 
-@hook.subscribe.setgroup
+@hook.subscribe.setgroup #Escritorios
 def update_group_icons():
         for group in qtile.groups:
             group.label = "" if group.name == qtile.current_group.name else ""
