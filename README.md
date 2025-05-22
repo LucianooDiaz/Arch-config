@@ -11,8 +11,9 @@
 -fastfetch
 -dolphin
 -nvim
-python
-python-psutil
+-python
+-python-psutil
+-networkmanager
 
 ### Fonts
 -NerdFonts
