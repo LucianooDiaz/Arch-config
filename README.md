@@ -15,6 +15,7 @@
 -python-psutil
 -networkmanager
 -mlocate
+-pamixer
 
 ### Fonts
 -NerdFonts
