@@ -13,7 +13,22 @@
                     ).strip(),
                     fontsize=18,
                 ),
+----
+#!/bin/bash
 
+wifi=$(nmcli -t -f TYPE,STATE device | grep '^wifi:connected')
+eth=$(nmcli -t -f TYPE,STATE device | grep '^ethernet:connected')
+
+if [ -n "$wifi" ]; then
+    echo ""
+
+elif [ -n "$eth" ]; then
+    echo "󰈁"
+
+else [ -n "$wifi" ]; then
+    echo ""
+fi
+-----
 Traceback (most recent call last):
   File "/usr/lib/python3.13/site-packages/libqtile/widget/base.py", line 884, in on_done
     result = future.result()
@@ -25,8 +40,8 @@ Traceback (most recent call last):
   File "/home/luciano/.config/qtile/config.py", line 273, in <lambda>
     func=lambda: subprocess.check_output (
                  ~~~~~~~~~~~~~~~~~~~~~~~~^
-        ["home/luciano/.config/utiles/network_icon.sh"],
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        ["/home/luciano/.config/utiles/network_icon.sh"],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         universal_newlines=True,
         ^^^^^^^^^^^^^^^^^^^^^^^^
         shell=True
@@ -41,5 +56,6 @@ Traceback (most recent call last):
   File "/usr/lib/python3.13/subprocess.py", line 577, in run
     raise CalledProcessError(retcode, process.args,
                              output=stdout, stderr=stderr)
-subprocess.CalledProcessError: Command '['home/luciano/.config/utiles/network_icon.sh']' returned non-zero exit status 127.
-2025-05-22 12:28:07,665 WARNING libqtile base.py:on_done():L899 genpolltext's poll() returned None, not rescheduling
+subprocess.CalledProcessError: Command '['/home/luciano/.config/utiles/network_icon.sh']' returned non-zero exit status 2.
+2025-05-22 12:29:16,548 WARNING libqtile base.py:on_done():L899 genpolltext's poll() returned None, not rescheduling
+
