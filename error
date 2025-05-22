@@ -1,10 +1,1 @@
-widget.GenPollText(
-    update_interval=0.5,
-    func=lambda: subprocess.getoutput(
-        "pamixer --get-volume-human | awk '{ if ($1 == \"muted\") print \"󰝟  Muted\"; else print \"󰕾  \"$1 }'"
-    ),
-    foreground=colors["foreground"],
-    background=colors["background"],
-    padding=10,
-    fontsize=13,
-),
+"xidlehook --not-when-fullscreen --timer 30 'alacritty -- asciiquarium'"
