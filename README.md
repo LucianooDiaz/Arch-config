@@ -2,6 +2,7 @@
 -Configuracion casi total de mi arch
 
 ## Dependencias
+-xprop (opcional)
 -feh (opcional)
 -playerctl
 -rofi
