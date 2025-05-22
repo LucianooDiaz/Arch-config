@@ -10,4 +10,4 @@
 -nvim
 
 ### Fonts
-#-NerdFonts
+-NerdFonts
