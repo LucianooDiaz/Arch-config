@@ -11,6 +11,8 @@
 -fastfetch
 -dolphin
 -nvim
+python
+python-pip
 
 ### Fonts
 -NerdFonts
