@@ -16,6 +16,7 @@
 -networkmanager
 -mlocate
 -pamixer
+-yay
 
 ### Fonts
 -NerdFonts
