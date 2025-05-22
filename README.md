@@ -2,6 +2,8 @@
 -Configuracion casi total de mi arch
 
 ## Dependencias
+-feh (opcional)
+-playerctl
 -rofi
 -pywal
 -picom
