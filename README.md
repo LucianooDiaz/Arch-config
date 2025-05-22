@@ -3,13 +3,12 @@ Arch-config
 
 Dependencias
 
-#-rofi
-#-pywal
-#-picom
-#-fastfetch
-#-dolphin
-#-nvim
-#-
+rofi
+pywal
+picom
+fastfetch
+dolphin
+nvim
 
 Fonts
 #-NerdFonts
