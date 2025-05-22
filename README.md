@@ -12,7 +12,7 @@
 -dolphin
 -nvim
 python
-python-pip
+python-pipx
 
 ### Fonts
 -NerdFonts
