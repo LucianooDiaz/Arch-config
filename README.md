@@ -1,5 +1,5 @@
-Arch-config
-#Configuracion casi total de mi arch
+#Arch-config
+Configuracion casi total de mi arch
 
 Dependencias
 
