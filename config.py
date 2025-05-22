@@ -46,6 +46,18 @@ with open(wal_colors_path) as f:
         "inactive": wal["special"]["color8"],
     }
 
+gb = qtile.widgets_map.get("groupbox")
+    if gb:
+        gb.background = colors["background"]
+        gb.active = colors["active"]
+        gb.inactive = colors["inactive"]
+        gb.this_current_screen_border = colors["border"]
+        gb.bar.draw()
+
+    for screen in qtile.screens:
+        screen.top.background = colors["background"]
+        screen.top.draw()
+
 
 mod = "mod4"
 terminal = guess_terminal()
