@@ -41,22 +41,11 @@ with open(wal_colors_path) as f:
     colors = {
         "background": wal["special"]["background"],
         "foreground": wal["special"]["foreground"],
-        "border": wal["special"]["color0"],
-        "active": wal["special"]["color6"],
-        "inactive": wal["special"]["color8"],
+        "border": wal["colors"]["color10"],
+        "active": wal["colors"]["color10"],
+        "inactive": wal["colors"]["color8"],
     }
 
-gb = qtile.widgets_map.get("groupbox")
-    if gb:
-        gb.background = colors["background"]
-        gb.active = colors["active"]
-        gb.inactive = colors["inactive"]
-        gb.this_current_screen_border = colors["border"]
-        gb.bar.draw()
-
-    for screen in qtile.screens:
-        screen.top.background = colors["background"]
-        screen.top.draw()
 
 
 mod = "mod4"
@@ -235,8 +224,8 @@ screens = [
                     },
                     fontsize= 18,
                     padding=8,
-                    background= '#00000000',
-                    foreground= '#81a1c1',
+                    #background= '#00000000',
+                    foreground=colors["foreground"],
                 ),
 
                 widget.Spacer(length=4), #Reproductor
@@ -250,7 +239,7 @@ screens = [
                     padding=13,
                     fontsize=13,
                     foreground= '#ffffff',
-                    background= '#00000000',
+                    #background= '#00000000',
                     name = 'media',
                     ),
 
@@ -266,7 +255,6 @@ screens = [
                         
                     margin = 3,
                     scale = True,
-                    background= '#00000000'
 
                 ),
 
@@ -277,29 +265,29 @@ screens = [
                 widget.Net(
                    interface='enp0s3',  # ethernet.  #wlp2s0, wlan0 para wifi
                     format='  {down} ↓↑ {up}',
-                    background= '#1e1e2e',
-                    foreground='#a3be8c',
+                    background=colors["background"],
+                    foreground=colors["foreground"],
                 ),
                 *(
                     [widget.Battery(
-                        format='  {percent:2.0%}',
+                        format='  {percent:10.0%}',
                         charge_char='',
                         discharge_char='',
                         empty_char='',
                         full_char='',
                         show_short_text=False,
-                        background='#1e1e2e',
-                        foreground='#ebcb8b',
+                    background=colors["background"],
+                    foreground=colors["foreground"],
                     )] if has_battery else []
                 ),
                 widget.Clock(
                     format='󰥔  %H:%M',
-                    background='#1e1e2e',
-                    foreground='#81a1c1',
+                    background=colors["background"],
+                    foreground=colors["foreground"],
                 ),
             ],
             24,
-            background= '00000000',
+            background=colors["background"],
             margin=[4, 8, 0, 8],
             opacity=0.8,
             rounded=True,
