@@ -33,6 +33,19 @@ import os
 import subprocess
 import json
 
+wal_colors_path= Path.home() / ".cache" /"wal" /"colors.json"
+
+with open(wal_colors_path) as f:
+    wal = json.load(f)
+
+    colors = {
+        "background": wal["special"]["background"],
+        "foreground": wal["special"]["foreground"],
+        "border": wal["special"]["color0"],
+        "active": wal["special"]["color6"],
+        "inactive": wal["special"]["color8"],
+    }
+
 
 mod = "mod4"
 terminal = guess_terminal()
@@ -195,10 +208,10 @@ screens = [
                 widget.GroupBox(        #Escritorios
                     name="groupbox",
                     highlight_method='text',
-                    this_current_screen_border=["border"],
-                    background=["background"],
-                    active=["active"],
-                    inactive=["inactive"],
+                    this_current_screen_border=colors["border"],
+                    background=colors["background"],
+                    active=colors["active"],
+                    inactive=colors["inactive"],
                     fontsize=14,
                 ),
 
@@ -323,18 +336,7 @@ def update_group_icons():
 
         qtile.call_soon(lambda: qtile.widgets_map["groupbox"].bar.draw())
 
-wal_colors_path= Path.home() / ".cache" /"wal" /" colors.json"
 
-with open(wal_colors_path) as f:
-    wal = json.load(f)
-
-    colors = {
-        "background": wal["special"]["background"],
-        "foreground": wal["special"]["foreground"],
-        "border": wal["special"]["color0"],
-        "active": wal["special"]["color6"],
-        "inactive": wal["special"]["color8"],
-    }
 
 
 
