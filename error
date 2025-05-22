@@ -25,5 +25,5 @@ Traceback (most recent call last):
   File "/usr/lib/python3.13/subprocess.py", line 577, in run
     raise CalledProcessError(retcode, process.args,
                              output=stdout, stderr=stderr)
-subprocess.CalledProcessError: Command '['~/.config/utiles/network_icon.sh']' returned non-zero exit status 126.
-2025-05-22 12:17:52,314 WARNING libqtile base.py:on_done():L899 genpolltext's poll() returned None, not rescheduling
+subprocess.CalledProcessError: Command '['~/.config/utiles/network_icon.sh']' returned non-zero exit status 2.
+2025-05-22 12:19:56,441 WARNING libqtile base.py:on_done():L899 genpolltext's poll() returned None, not rescheduling
