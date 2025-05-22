@@ -28,8 +28,11 @@ from libqtile import bar, layout, qtile, widget, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
+from pathlib import Path
 import os
 import subprocess
+import json
+
 
 mod = "mod4"
 terminal = guess_terminal()
@@ -192,16 +195,16 @@ screens = [
                 widget.GroupBox(        #Escritorios
                     name="groupbox",
                     highlight_method='text',
-                    this_current_screen_border='#2e3440',
-                    active='#cccccc',
-                    inactive='#555555',
-                    background= '#1e1e2e',
+                    this_current_screen_border=["border"],
+                    background=["background"],
+                    active=["active"],
+                    inactive=["inactive"],
                     fontsize=14,
                 ),
 
-                widget.Spacer(length=8),
-                widget.TextBox(         #Menu cambio wallpaper
-                    text= "󰸉",
+                widget.Spacer(length=10),
+                widget.TextBox(    #Menu cambio wallpaper
+                    text= "",
                     mouse_callbacks={
                         'Button1': lambda: qtile.cmd_spawn ("/home/luciano/.config/utiles/rofi_menu.sh")
                     },
@@ -211,14 +214,15 @@ screens = [
                     foreground= '#81a1c1',
                 ),
 
-                widget.Spacer(length=8), #Reproductor
+                widget.Spacer(length=4), #Reproductor
                 widget.GenPollText(
                     update_interval = 1,
                     func= lambda:(
                         out if "No players found" not in (out :=  subprocess.getoutput(
-                            "playerctl metadata --format '{{ artist }} - {{ title }}'"
+                            "playerctl metadata --format '󰎆   {{ artist }} - {{ title }}'"
                          ).strip()) else ""
                     ),
+                    padding=13,
                     fontsize=13,
                     foreground= '#ffffff',
                     background= '#00000000',
@@ -230,6 +234,11 @@ screens = [
 
                 widget.Image(            #Icono central
                     filename = '/home/luciano/.config/qtile/icons/archlinux.svg',
+                    mouse_callbacks= {
+                       # 'Button1': lambda: qtile.cmd_spawn ("systemctl suspend"),
+                        'Button3': lambda: qtile.cmd_spawn ("shutdown now")
+                    },
+                        
                     margin = 3,
                     scale = True,
                     background= '#00000000'
@@ -268,6 +277,7 @@ screens = [
             background= '00000000',
             margin=[4, 8, 0, 8],
             opacity=0.8,
+            rounded=True,
         ),
     ),
 ]
@@ -305,9 +315,26 @@ autostart = [
 for x in autostart:
     os.system(x)
 
-@hook.subscribe.setgroup #Escritorios
+#Escritorios
+@hook.subscribe.setgroup 
 def update_group_icons():
         for group in qtile.groups:
             group.label = "" if group.name == qtile.current_group.name else ""
 
         qtile.call_soon(lambda: qtile.widgets_map["groupbox"].bar.draw())
+
+wal_colors_path= Path.home() / ".cache" /"wal" /" colors.json"
+
+with open(wal_colors_path) as f:
+    wal = json.load(f)
+
+    colors = {
+        "background": wal["special"]["background"],
+        "foreground": wal["special"]["foreground"],
+        "border": wal["special"]["color0"],
+        "active": wal["special"]["color6"],
+        "inactive": wal["special"]["color8"],
+    }
+
+
+
