@@ -1,3 +1,19 @@
+                widget.Net(
+                   interface='enp0s3',  # ethernet.  #wlp2s0, wlan0 para wifi
+                    format='    {down} ↓↑ {up}',
+                    background=colors["background"],
+                    foreground=colors["foreground"],
+                ),
+                widget.GenPollText(
+                    update_interval=5,
+                    func=lambda: subprocess.check_output (
+                        ["home/luciano/.config/utiles/network_icon.sh"],
+                        universal_newlines=True,
+                        shell=True
+                    ).strip(),
+                    fontsize=18,
+                ),
+
 Traceback (most recent call last):
   File "/usr/lib/python3.13/site-packages/libqtile/widget/base.py", line 884, in on_done
     result = future.result()
@@ -9,8 +25,8 @@ Traceback (most recent call last):
   File "/home/luciano/.config/qtile/config.py", line 273, in <lambda>
     func=lambda: subprocess.check_output (
                  ~~~~~~~~~~~~~~~~~~~~~~~~^
-        ["~/.config/utiles/network_icon.sh"],
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        ["home/luciano/.config/utiles/network_icon.sh"],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         universal_newlines=True,
         ^^^^^^^^^^^^^^^^^^^^^^^^
         shell=True
@@ -25,5 +41,5 @@ Traceback (most recent call last):
   File "/usr/lib/python3.13/subprocess.py", line 577, in run
     raise CalledProcessError(retcode, process.args,
                              output=stdout, stderr=stderr)
-subprocess.CalledProcessError: Command '['~/.config/utiles/network_icon.sh']' returned non-zero exit status 2.
-2025-05-22 12:19:56,441 WARNING libqtile base.py:on_done():L899 genpolltext's poll() returned None, not rescheduling
+subprocess.CalledProcessError: Command '['home/luciano/.config/utiles/network_icon.sh']' returned non-zero exit status 127.
+2025-05-22 12:28:07,665 WARNING libqtile base.py:on_done():L899 genpolltext's poll() returned None, not rescheduling
