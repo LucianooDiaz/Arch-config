@@ -14,6 +14,7 @@
 -python
 -python-psutil
 -networkmanager
+-mlocate
 
 ### Fonts
 -NerdFonts
