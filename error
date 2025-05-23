@@ -1,14 +1,9 @@
-#!/bin/bash
+[Desktop Entry]
+Type=Application
+Exec=/home/tu_usuario/run_asciiquarium_if_idle.sh
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name=Asciiquarium Idle
+Comment=Ejecuta asciiquarium tras inactividad
 
-IDLE_TIME_LIMIT=300000  # 5 minutos en milisegundos
-
-while true; do
-    idle_time=$(xprintidle)
-    if [ "$idle_time" -ge "$IDLE_TIME_LIMIT" ]; then
-        clear
-        asciiquarium
-        # Después de salir de asciiquarium espera para que no se ejecute de nuevo inmediatamente
-        sleep 10
-    fi
-    sleep 5
-done
