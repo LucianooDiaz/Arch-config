@@ -1,8 +1,9 @@
 # Arch-config
 -Configuracion casi total de mi arch
 
-aa
+
 ## Dependencias
+-pavucontrol(pulseaudio)
 -xprop (opcional)
 -feh (opcional)
 -playerctl
