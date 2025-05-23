@@ -1,6 +1,7 @@
 # Arch-config
 -Configuracion casi total de mi arch
 
+aa
 ## Dependencias
 -xprop (opcional)
 -feh (opcional)
