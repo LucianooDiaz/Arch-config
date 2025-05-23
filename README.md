@@ -11,7 +11,7 @@
 -pywal
 -picom
 -fastfetch
--dolphin
+-nemo
 -nvim
 -python
 -python-psutil
