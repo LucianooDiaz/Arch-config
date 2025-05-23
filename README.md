@@ -17,6 +17,7 @@
 -mlocate
 -pamixer
 -yay
+-lightdm-webkit2-greeter
 
 ### Fonts
 -NerdFonts
