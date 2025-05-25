@@ -29,6 +29,7 @@ with open(wal_colors_path) as f:
 
 
 mod = "mod4"
+alt = "mod1"
 terminal = guess_terminal()
 
 keys = [
@@ -55,6 +56,9 @@ keys = [
     Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
     Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
     Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
+    Key([alt], "x", lazy.spawn("playerctl play-pause"), desc="Pausa Musica"),
+    Key([alt], "z", lazy.spawn("playerctl previous"), desc="siguiente cancion"),
+    Key([alt], "c", lazy.spawn("playerctl next"), desc="proxima cancion"),
     # Toggle between split and unsplit sides of stack.
     # Split = all windows displayed
     # Unsplit = 1 window displayed, like Max layout, but still with
