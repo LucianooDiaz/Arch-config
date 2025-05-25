@@ -1,0 +1,45 @@
+* {
+  font: "NerdFonts 12";
+  text-color: #cdd6f4;
+  background-color: #193423;
+  prompt-color: #d4d1cd;
+  selected-normal-background: #5F9272;
+  selected-normal-foreground: #348967;
+  border: 0px;
+  padding: 0;
+  border-radius: 0px;
+}
+
+window {
+  width: 300px;
+  location: center;
+  anchor: center;
+}
+
+mainbox {
+  children: [prompt, listview];
+  spacing: 10;
+  padding: 10px;
+}
+
+prompt {
+  padding: 5px;
+  text-color: @prompt-color;
+}
+
+listview {
+  lines: 6;
+  spacing: 10;
+  fixed-height: false;
+}
+
+element {
+  border: 0;
+  padding: 8px 12px;
+  border-radius: 0px;
+}
+
+element selected {
+  background-color: @selected-normal-background;
+  text-color: @selected-normal-foreground;
+}
