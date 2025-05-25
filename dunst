@@ -1,20 +1,21 @@
 #!/bin/bash
 
-# Archivo de colores generado por pywal
 WAL_COLORS="$HOME/.cache/wal/colors"
-
-# Extraer color de fondo (primera línea)
-BACKGROUND=$(sed -n 1p "$WAL_COLORS")
-
 DUNST_CONFIG="$HOME/.config/dunst/dunstrc"
 
-# Reemplazar el background sin comillas, solo líneas que empiecen con background =
-sed -i "s/^background = .*/background = $BACKGROUND/" "$DUNST_CONFIG"
+# Extraer color de fondo con # y comillas
+BACKGROUND=$(sed -n 1p "$WAL_COLORS")
 
-# Reemplazar frame_color si existe
-sed -i "s/^frame_color = .*/frame_color = $BACKGROUND/" "$DUNST_CONFIG"
+# Comprobar que contiene #
+if [[ "$BACKGROUND" != \#* ]]; then
+    echo "Error: color extraído no contiene '#': $BACKGROUND"
+    exit 1
+fi
 
-# Reiniciar dunst para aplicar cambios
+# Reemplazar con comillas dobles, el color ya incluye #
+sed -i "s/^background = .*/background = \"$BACKGROUND\"/" "$DUNST_CONFIG"
+sed -i "s/^frame_color = .*/frame_color = \"$BACKGROUND\"/" "$DUNST_CONFIG"
+
+# Reiniciar dunst
 pkill -x dunst
 dunst &
-
