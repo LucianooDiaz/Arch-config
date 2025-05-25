@@ -135,8 +135,8 @@ layouts = [
         border_focus='#81a1c1',
         border_focus_stack=["#1e1e2e", "#88c0d0"],
         border_normal='#3b4252',
-        border_width=3,
-        margin=8,
+        border_width=0,
+        margin=5,
     ),
     layout.Max(),
     # Try more layouts by unleashing below layouts.
