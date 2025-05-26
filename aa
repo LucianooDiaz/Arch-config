@@ -1,18 +1,22 @@
-widget.TextBox(    #Spotify
-                    name = spotify,
-                    text= "",
-                    mouse_callbacks={
-                        'Button1': lambda: abrir_spotify_y_cambiar_color(qtile)
-                    },
-                    fontsize= 18,
-                    padding=8,
-                    #background= '#00000000',
-                    foreground=colors["foreground"],
-                ),
+import psutil
+from threading import Timer
 
-def abrir_spotify_y_cambiar_color():
+def abrir_spotify_y_cambiar_color(qtile):
     qtile.cmd_spawn("spotify-launcher")
     widget = qtile.widgets_map["spotify"]
     widget.foreground = "#00ffff"
     widget.draw()
+
+    def verificar_si_spotify_sigue():
+        spotify_activo = any("spotify" in p.name().lower() for p in psutil.process_iter())
+        if not spotify_activo:
+            widget.foreground = colors["foreground"]
+            widget.draw()
+        else:
+            # Revisa de nuevo en 2 segundos
+            Timer(2.0, verificar_si_spotify_sigue).start()
+
+    # Inicia la primera revisión luego de unos segundos
+    Timer(3.0, verificar_si_spotify_sigue).start()
+
 
