@@ -1,0 +1,18 @@
+widget.TextBox(    #Spotify
+                    name = spotify,
+                    text= "",
+                    mouse_callbacks={
+                        'Button1': lambda: abrir_spotify_y_cambiar_color(qtile)
+                    },
+                    fontsize= 18,
+                    padding=8,
+                    #background= '#00000000',
+                    foreground=colors["foreground"],
+                ),
+
+def abrir_spotify_y_cambiar_color():
+    qtile.cmd_spawn("spotify-launcher")
+    widget = qtile.widgets_map["spotify"]
+    widget.foreground = "#00ffff"
+    widget.draw()
+
