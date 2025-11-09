@@ -3,6 +3,7 @@
 
 
 ## Dependencias
+
 -pavucontrol(pulseaudio)
 -xprop (opcional)
 -feh (opcional)
@@ -20,6 +21,8 @@
 -pamixer
 -yay
 -lightdm-webkit2-greeter
+-alacritty (o kitty)
 
 ### Fonts
 -NerdFonts
+-Weather Icons
