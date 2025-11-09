@@ -1,0 +1,1 @@
+format="<span font_desc='Weather Icons 20'>{icon}</span>  <span font_desc='0xProto Nerd Font 16'>{temp}°C</span>",
