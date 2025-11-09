@@ -22,6 +22,7 @@
 -yay
 -lightdm-webkit2-greeter
 -alacritty (o kitty)
+-ranger
 
 ### Fonts
 -NerdFonts
